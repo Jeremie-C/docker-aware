@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+#shellcheck shell=bash
+
+ulimit -c 0
+
+/usr/bin/rbfeeder 2>&1 | \
+    mawk -W Interactive '! / Statistics updated every 30 seconds /' | \
+    mawk -W Interactive '! /Packets sent in the last 30 seconds: /' | \
+    mawk -W Interactive '! / Data sent: /' | \
+    mawk -W Interactive '! / Data received: /' | \
+    mawk -W Interactive '{print "[rbfeeder] " $0}'

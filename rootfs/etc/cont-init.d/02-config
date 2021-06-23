@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+sed -i -e "/^key=.*/c\key=\"${RBFEEDER_KEY}\"" /etc/rbfeeder.ini
+sed -i -e "/^lat=.*/c\lat=\"${LATITUDE}\"" /etc/rbfeeder.ini
+sed -i -e "/^lon=.*/c\lon=\"${LONGITUDE}\"" /etc/rbfeeder.ini
+sed -i -e "/^alt=.*/c\alt=\"${ALTITUDE}\"m" /etc/rbfeeder.ini
+
+sed -i -e "/^external_host=.*/c\external_host=\"${BEAST_HOST}\"" /etc/rbfeeder.ini
+sed -i -e "/^external_port=.*/c\external_port=\"${BEAST_PORT}\"" /etc/rbfeeder.ini
