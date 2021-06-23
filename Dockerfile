@@ -25,6 +25,8 @@ RUN apt-get update && apt-get upgrade -y && \
   echo "deb https://apt.rb24.com/ buster main" > /etc/apt/sources.list.d/rb24.list && \
   # Arch Specific Operations
   /scripts/arch-specific.sh && \
+  # Move rbfeeder.ini 
+  mv /scripts/rbfeeder.ini /etc/rbfeeder.ini && \
   # S6 OVERLAY
   /scripts/s6-overlay.sh && \
   # MLAT Client
