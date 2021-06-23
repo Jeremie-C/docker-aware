@@ -21,7 +21,7 @@ RUN apt-get update && apt-get upgrade -y && \
   # i386 & amd64 specific
   /scripts/get-qemu.sh && \
   # RadarBox Repository
-  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 1D043681 && \
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 1D043681 && \
   echo "deb https://apt.rb24.com/ buster main" > /etc/apt/sources.list.d/rb24.list && \
   # Arch Specific Operations
   /scripts/arch-specific.sh && \
