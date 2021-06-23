@@ -9,6 +9,6 @@ case $arch in
     apt-get install -y --no-install-recommends qemu-user qemu-user-static binfmt-support
     ;;
   *)
-    exit 1
+    exit 0
     ;;
 esac
