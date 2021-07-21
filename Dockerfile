@@ -18,15 +18,18 @@ RUN apt-get update && apt-get upgrade -y && \
   binutils debhelper dirmngr git gnupg lsb-release netbase xz-utils \
   file build-essential python3 python3-dev && \
   chmod +x /scripts/*.sh && \
+  chmod +x /healthcheck.sh && \
   # i386 & amd64 specific
   /scripts/get-qemu.sh && \
+  # Import GPG key for the APT repository
+  KEY_ID=1D043681 && \
+  apt-key adv --recv-key --keyserver hkp://keyserver.ubuntu.com:80 ${KEY_ID} || \
+  apt-key adv --recv-key --keyserver hkp://pool.sks-keyservers.net:80 ${KEY_ID} || \
+  apt-key adv --recv-key --keyserver hkp://pgp.mit.edu:80 ${KEY_ID} && \
   # RadarBox Repository
-  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 1D043681 && \
   echo "deb https://apt.rb24.com/ buster main" > /etc/apt/sources.list.d/rb24.list && \
   # Arch Specific Operations
   /scripts/arch-specific.sh && \
-  # Move rbfeeder.ini 
-  mv /scripts/rbfeeder.ini /etc/rbfeeder.ini && \
   # S6 OVERLAY
   /scripts/s6-overlay.sh && \
   # MLAT Client
@@ -37,12 +40,12 @@ RUN apt-get update && apt-get upgrade -y && \
   ./setup.py install && \
   popd && \
   # Cleanup
-  apt-get remove -y binutils debhelper build-essential file git gnupg \
+  apt-get remove -y binutils debhelper build-essential file git dirmngr gnupg \
   python3-dev xz-utils && \
   apt-get autoremove -y && \
   rm -rf /scripts /src /var/lib/apt/lists/*
 
 ENTRYPOINT ["/init"]
 EXPOSE 30105
-#HEALTHCHECK --start-period=60s --interval=300s CMD /healthcheck.sh
+HEALTHCHECK --start-period=60s --interval=300s CMD /healthcheck.sh
 LABEL maintainer="Jeremie-C <Jeremie-C@users.noreply.github.com>"

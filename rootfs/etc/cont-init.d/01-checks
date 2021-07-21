@@ -10,7 +10,7 @@ CYAN='\e[0;36m'
 
 # Set up timezone
 if [ -z "${TZ}" ]; then
-  echo "${YELLOW}WARNING: TZ environment variable not set${NOCOLOR}"
+  echo -e "${YELLOW}WARNING: TZ environment variable not set${NOCOLOR}"
 else
   ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
 fi
@@ -35,8 +35,7 @@ if [ -z "${ALTITUDE}" ]; then
   EXITCODE=1
 fi
 # Handle "-e RBFEEDER_KEY"
-if [ -z "${RBFEEDER_KEY}" ]
-then
+if [ -z "${RBFEEDER_KEY}" ]; then
   echo ""
   echo "WARNING: RBFEEDER_KEY environment variable was not set!"
   echo "Please make sure you note down the key generated."

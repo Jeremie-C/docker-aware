@@ -16,7 +16,7 @@ exec /usr/local/bin/mlat-client \
     --results beast,listen,30105 \
     --lat "${LATITUDE}" \
     --lon "${LONGITUDE}" \
-    --alt "${ALTITUDE}m" \
+    --alt "${ALTITUDE}" \
     --user "${MLAT_SN}" \
     --server mlat1.rb24.com:40900 \
     2>&1 | mawk -W Interactive '{print "[mlat-client] " $0}'
