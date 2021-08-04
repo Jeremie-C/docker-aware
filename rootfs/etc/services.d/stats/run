@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 #shellcheck shell=bash
 
-sleep $((STATS_INTERVAL * 60))
+sleep $(($STATS_INTERVAL * 60))
 
 PACKETS_SINCE_LAST_UPDATE=0
 while read -r L; do
